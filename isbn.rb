@@ -23,9 +23,15 @@
 # modulo 10 of the result again to produce a single digit.
 
 def isbn_valid(pro)
-	#pro = pro.gsub("-","")# removes dashes
-	#pro = pro.gsub("-","")# removes spaces
-	"valid"
+	pro = pro.gsub("-","")# removes dashes
+	pro = pro.gsub("-","")# removes spaces
+		if pro.length == 10
+			"valid"
+		elsif pro.length == 13
+			"valid"
+		else
+	"invalid"
+end
 
 end
 

@@ -12,4 +12,11 @@ def test_067159937_return_valid
 	assert_equal("valid", isbn_valid(book_num))
 end
 
+def test_0_671_59993_7_returns_with_no_dashes
+		book_num ="0-671-59993-7"
+	assert_equal("valid", isbn_valid(book_num))  
+end
+
+
+
 end
