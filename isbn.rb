@@ -23,15 +23,37 @@
 # modulo 10 of the result again to produce a single digit.
 
 def isbn_valid(pro)
-	pro = pro.gsub("-","")# removes dashes
-	pro = pro.gsub("-","")# removes spaces
+
+	pro = pro.gsub("-","")				# removes dashes
+	pro = pro.gsub("-","")				# removes spaces
+	loop_counter = 1
+	accum_counter = 0					# stores the value of pro * hash
+	hash_key = "131313131313" 			#hash for isbn 13
+	hash_check = 0						# variable to compare to check_sum to determin valid or invalid
+	check_sum = pro[((pro.length)-1)] 	# capture the last character in pro as the check sum
+
+		if check_sum =="x"				# change check_sum = x to check_sum = 10
+			check_sum = 10
+		end
+
+
 		if pro.length == 10
-			"valid"
-		elsif pro.length == 13
-			"valid"
+			(1..9). each do |loop_counter|
+				accum_counter = accum_counter + pro[loop_counter].to_i * loop_counter
+			end
+			hash_check = accum_counter % 11
+		end
+			
+		if pro.length == 13
+			hash_check = check_sum
+		end
+
+		if hash_check = check_sum
+			result = "valid"
 		else
-	"invalid"
+			result = "invalid"
+		end
+		result
 end
 
-end
 

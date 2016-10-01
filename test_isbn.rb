@@ -7,37 +7,37 @@ class TestISBN < Minitest::Test  	#create template for test
 		assert_equal(1,1)
 	end
 
-	def test_067159937_return_valid
+	def test_067159937_return_valid_10
 		book_num ="0-671-59993-7"
 		assert_equal("valid", isbn_valid(book_num))
 	end
 
-	def test_0_671_59993_7_returns_with_no_dashes
+	def test_0_671_59993_7_returns_with_no_dashes_15
 		book_num ="0-671-59993-7"
 		assert_equal("valid", isbn_valid(book_num))  
 	end
 
-	def test_9783_returns_with_no_dashes
+	def test_9783_returns_with_no_dashes_20
 		book_num ="0-671-59993-7"
 		assert_equal("valid", isbn_valid(book_num))  
 	end
 
-	def test_9_780_59651617_8_returns_valid  # 13 digit isdn number for The Ruby Programming Language
+	def test_9_780_59651617_8_returns_valid_25  # 13 digit isdn number for The Ruby Programming Language
 		book_num="9-780-59651617-8"
 		assert_equal("valid", isbn_valid(book_num))  
 	end
 
-	def test_0596516177_returns_valid  # 10 digit isdn number for The Ruby Programming Language
+	def test_0596516177_returns_valid_30  # 10 digit isdn number for The Ruby Programming Language
 		book_num="0596516177"
 		assert_equal("valid", isbn_valid(book_num))  
 	end
 
-		def test_9_780_59651617_8_returns_invalid  
+	def test_9_780_59651617_8_returns_invalid_35  
 		book_num="9-780-59651617-82"
 		assert_equal("invalid", isbn_valid(book_num))  
 	end
 	
-	def test_0596516177_returns_invalid  
+	def test_0596516177_returns_invalid_40 
 		book_num="05965161772"
 		assert_equal("invalid", isbn_valid(book_num)) 
 	end
