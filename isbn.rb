@@ -24,10 +24,10 @@
 
 def isbn_valid(pro)
 
-	pro = pro.gsub("-","")				# removes dashes
-	pro = pro.gsub("-","")				# removes spaces
-	loop_counter = 1
-	accum_counter = 0					# stores the value of pro * hash
+	remove_dash_space(pro)
+	
+	result ="invalid"
+	accum = 0					# stores the value of pro * hash
 	hash_key = "131313131313" 			#hash for isbn 13
 	hash_check = 0						# variable to compare to check_sum to determin valid or invalid
 	check_sum = pro[((pro.length)-1)] 	# capture the last character in pro as the check sum
@@ -38,22 +38,42 @@ def isbn_valid(pro)
 
 
 		if pro.length == 10
-			(1..9). each do |loop_counter|
-				accum_counter = accum_counter + pro[loop_counter].to_i * loop_counter
-			end
-			hash_check = accum_counter % 11
+			hash_check = calculate_check_sum_for_10_digit(pro)
 		end
 			
 		if pro.length == 13
-			hash_check = check_sum
+			calculate_check_sum_for_13_digits(pro)
+
+			
 		end
 
-		if hash_check = check_sum
+		if hash_check == check_sum
 			result = "valid"
 		else
 			result = "invalid"
 		end
 		result
 end
+def remove_dash_space(pro)
+	#puts "class of pro initial pro #{pro.class}"
+	pro = pro.gsub("-","")				# removes dashes move into a function to remove dashes and spaces
+	pro = pro.gsub(" ","")				# removes spaces
+	#pro=pro.gsub(/[^0-9a-x]/i,"")
+	#puts "revised pro #{pro}"
+end
 
+def calculate_check_sum_for_10_digit(pro)
+			accum = 0
+			(0..8).each do |counter|
+				accum = accum + pro[counter].to_i * counter+1
+			end
+			hash_check = accum % 11
+end
 
+def calculate_check_sum_for_13_digits(pro)
+		hash_key = "131313131313" 			#hash for isbn 13
+		(1..12).each do |counter|
+			accum = accum + pro[counter].to_i * hash_key[counter].to_i
+		end
+		hash_check = 10 - (accum % 10)
+end
