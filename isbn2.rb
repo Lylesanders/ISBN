@@ -1,21 +1,47 @@
-def valid_isbn?(isbn)  # main
-	isbn = remove_spaces(isbn)
-	isbn = remove_dashes(isbn)
-	isbn.length ==10 	# works like an if statement returning true/false	
-	# multiply each digit in the string by its position for the first 9digits, then add them and modulo divide by 11, this equals the last digit.
-	sum = 0
-	ten_digit_array = isbn.chars.map!(&:to_i)   #splits the string into an array of individual characters
-	ten_digit_array.each.with_index do |value, index|
-		break if index == 9
-		sum += (index+1) * value
-	end
-end						#end of function
+def valid_isbn?(isbn)
+    isbn = remove_spaces(isbn) #calls the function referenced and redefines isbn
+    isbn = remove_dashes(isbn)
+ 
+    if valid_isbn_ten_length?(isbn) && valid_isbn_ten_check_sum?(isbn) #same as doing and if else statement
+        true
+    else
+        false
+    end
 
-def remove_dashes(isbn)
-	
-	isbn.gsub("-","")	#remove dashes ! updates the variable
-end
+    #multiply each digit in the string by it's position for the first 9 digits, then add them and "modulo" cuz thats not a real word! by 11, this should equal the last digit
+end   #end function valid_isbn?
+
+def valid_isbn_ten_length?(isbn)
+	isbn.length == 10
+end # valid isbn ten length
+
+def valid_isbn_ten_check_sum?(isbn)
+
+    ten_digit_array = isbn.chars.map!(&:to_i) #splits the string into an array of individual characters as intigers & is shorthand for something longer - research this later
+    sum = 0
+    ten_digit_array.each_with_index do |value, index|
+        break if index == 9
+        sum += (index + 1) * value
+    end  #end do
+    if sum%11 == ten_digit_array.last
+    	true
+    else
+    	false
+    end #end if
+end # end valid isbn ten check sum
 
 def remove_spaces(isbn)
-	isbn.gsub(" ", "") #removes spaces from isbn number ! updates the variableisbn
+
+    isbn.gsub(" ", "") #this strips the whitespace and redifines isbn by using the !. remember ! is permenantish
+
+    # isbn.delete!(" ") #this deletes the item in the quotes
+
+end
+
+def remove_dashes(isbn)
+
+    isbn.gsub("-", "") #this strips the dashes from isbn and redefines it without them
+
+    # isbn.delete!("-")
+
 end
