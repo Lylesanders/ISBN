@@ -43,8 +43,18 @@ def valid_isbn_ten_check_sum?(isbn)
 end # end valid isbn ten check sum
 
 def valid_isbn_thirteen_check_sum?(isbn)
-	true
-end
+	sum = 0
+	check_sum = 0
+	mask =[1,3,1,3,1,3,1,3,1,3,1,3]
+	thirteen_digit_array = isbn.chars.map!(&:to_i)
+	(0..11).each do |counter|
+		sum = thirteen_digit_array[counter] * mask[counter]
+		check_sum = check_sum + sum
+		puts check_sum
+	end # of do loop	
+	false
+	
+end #end of function valid isbn 13 check sum
 
 
 def remove_spaces(isbn)
