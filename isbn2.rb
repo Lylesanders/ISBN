@@ -33,11 +33,11 @@ def valid_isbn_ten_check_sum?(isbn)
 		true
 	else
 		false
-	end
-
-
+	end # end if check sum string 
 
 end # end valid isbn ten check sum
+
+
 
 def remove_spaces(isbn)
     isbn.gsub(" ", "") #this strips the whitespace and redifines isbn by using the !. remember ! is permenantish
