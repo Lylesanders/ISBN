@@ -37,10 +37,23 @@ class TestISBN2 < Minitest::Test  	#create template for test
 		assert_equal(true, valid_isbn?(isbn))
 	end
 
-	def test_valid_returns_24719586978_40
+	def test_valid_returns_123456789x_40
 		isbn = "123456789x"
 		assert_equal(true, valid_isbn?(isbn))
 	end
 
+	def test_invalid_returns_323456789x_45
+		isbn = "323456789x"
+		assert_equal(false, valid_isbn?(isbn))
+	end
+
+	def test_invalid_returns_1234567891231_35
+		isbn = "1234567891231"
+		assert_equal(true, valid_isbn_13_length?(isbn))
+	end
+	def test_invalid_returns_1234567891231_35
+		isbn = "12345678912531"
+		assert_equal(false , valid_isbn_13_length?(isbn))
+	end
 
 end
