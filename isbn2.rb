@@ -38,7 +38,7 @@ def valid_isbn_ten_check_sum?(isbn)
 end # end valid isbn ten check sum
 
 def valid_isbn_13_length?(isbn)
-	true
+	isbn.length == 13
 
 end # end valid isbn 13 length
 
