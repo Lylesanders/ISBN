@@ -13,29 +13,35 @@ end   #end function valid_isbn?
 
 def valid_isbn_ten_length?(isbn)
 	isbn.length == 10
+	#puts "ISBN length == 10 #{isbn.length == 10}"
 end # valid isbn ten length
 
 def valid_isbn_ten_check_sum?(isbn)
+	ten_digit_array = isbn.chars.map!(&:to_i)
+	sum = 0
+	ten_digit_array.each_with_index do |value, index|
+		break if index == 9
+		sum  +=(index+1) * value
+	end
+	check_sum = sum % 11
+	if check_sum == 10
+		check_sum = "X"
+	end
 
-    ten_digit_array = isbn.chars.map!(&:to_i) #splits the string into an array of individual characters as intigers & is shorthand for something longer - research this later
-    sum = 0
-    ten_digit_array.each_with_index do |value, index|
-        break if index == 9
-        sum += (index + 1) * value
-    end  #end do
-    if sum%11 == ten_digit_array.last
-    	true
-    else
-    	false
-    end #end if
+	check_sum_string = check_sum.to_s
+	if check_sum_string == isbn[-1].upcase
+		true
+	else
+		false
+	end
+
+
+
 end # end valid isbn ten check sum
 
 def remove_spaces(isbn)
-
     isbn.gsub(" ", "") #this strips the whitespace and redifines isbn by using the !. remember ! is permenantish
-
     # isbn.delete!(" ") #this deletes the item in the quotes
-
 end
 
 def remove_dashes(isbn)
