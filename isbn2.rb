@@ -50,9 +50,12 @@ def valid_isbn_thirteen_check_sum?(isbn)
 	(0..11).each do |counter|
 		sum = thirteen_digit_array[counter] * mask[counter]
 		check_sum = check_sum + sum
-		puts check_sum
-	end # of do loop	
-	false
+		
+	end # of do loop
+	check_sum1 = 10 - (check_sum % 10)	
+	check_digit = thirteen_digit_array[-1]
+	
+	check_digit == check_sum1
 	
 end #end of function valid isbn 13 check sum
 
