@@ -1,11 +1,13 @@
 def valid_isbn?(isbn)
     isbn = remove_spaces(isbn) #calls the function referenced and redefines isbn
     isbn = remove_dashes(isbn)
- 
     if valid_isbn_ten_length?(isbn) && valid_isbn_ten_check_sum?(isbn) #same as doing and if else statement
         true
+    elsif valid_isbn_13_length?(isbn) && valid_isbn_thirteen_check_sum?(isbn)
+    	true
     else
-        false
+    	false
+
     end
 
     #multiply each digit in the string by it's position for the first 9 digits, then add them and "modulo" cuz thats not a real word! by 11, this should equal the last digit
@@ -17,8 +19,7 @@ def valid_isbn_ten_length?(isbn)
 end # valid isbn ten length
 
 def valid_isbn_13_length?(isbn)
-	isbn.length == 13
-
+		isbn.length == 13
 end # end valid isbn 13 length
 
 def valid_isbn_ten_check_sum?(isbn)
@@ -48,15 +49,22 @@ def valid_isbn_thirteen_check_sum?(isbn)
 	mask =[1,3,1,3,1,3,1,3,1,3,1,3]
 	thirteen_digit_array = isbn.chars.map!(&:to_i)
 	(0..11).each do |counter|
-		sum = thirteen_digit_array[counter] * mask[counter]
-		check_sum = check_sum + sum
-		
+		sum1 = thirteen_digit_array[counter] * mask[counter]
+		sum += sum1
+	# puts sum	
 	end # of do loop
-	check_sum1 = 10 - (check_sum % 10)	
-	check_digit = thirteen_digit_array[-1]
+	pre_check_sum = sum % 10
+	check_sum = 10 - pre_check_sum
+	end_check_sum = check_sum % 10
+	end_check_sum_string = end_check_sum.to_s
 	
-	check_digit == check_sum1
-	
+	if end_check_sum_string == isbn[-1]
+		true
+	else
+		false
+	end
+
+
 end #end of function valid isbn 13 check sum
 
 
