@@ -51,20 +51,20 @@ class TestISBN2 < Minitest::Test  	#create template for test
 		isbn = "1234567891231"
 		assert_equal(true, valid_isbn_13_length?(isbn))
 	end
-	
+
 	def test_invalid_returns_1234567891231
 		isbn = "12345678912531"
-		assert_equal(false , valid_isbn_13_length?(isbn))
+		assert_equal(false , valid_13_digit_checksum?(isbn))
 	end
 
-	# def test_valid_returns_1234567891231
-	# 	isbn = "1234567891231"
-	# 	assert_equal(true, valid_isbn_thirteen_check_sum?(isbn))
-	# end
+	def test_valid_returns_1234567891231
+		isbn = "1234567891231"
+		assert_equal(true, valid_13_digit_checksum?(isbn))
+	end
 
 	# def test_valid_returns_1234567891232
 	# 	isbn = "1234567891232"
-	# 	assert_equal(false, valid_isbn_thirteen_check_sum?(isbn))
+	# 	assert_equal(false, valid_13_digit_checksum?(isbn))
 	# end
 	# # numbers beyond this point are from amazon
 	# # isdn 10 valids

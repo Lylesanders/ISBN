@@ -1,24 +1,24 @@
 def valid_isbn?(isbn)
 	remove_spaces(isbn)
 	remove_dashes(isbn)
-	# valid_isbn_length?(isbn)
-	if valid_isbn_length?(isbn) == true && isbn.length == 10
-		valid_10_digit_checksum?(isbn)
+	if valid_10_digit?(isbn) && valid_10_digit_checksum?(isbn)
+		true
+	elsif valid_13_digit?(isbn) && valid_13_digit_checksum?(isbn)
+		true
 	else
 		false
-	end
-end
+	end # if
+	
+end # function
 
-def valid_isbn_length?(isbn)
-	puts isbn.length 			#remove this line of code vefore finalize
-	if isbn.length == 10
-		true
-	elsif isbn.length == 13
-		true
-	else
-		false
-	end
-end
+def valid_10_digit?(isbn)
+	isbn.length == 10
+end # valid 10 digit function 
+
+def valid_13_digit?(isbn)
+	isbn.length == 13
+end # valid 13 digit function
+
 
 def remove_spaces(isbn)
 
@@ -33,7 +33,7 @@ def remove_dashes(isbn)
 end
 
 def valid_10_digit_checksum?(isbn)
-	puts"calculating 10 digit check sum "
+	# puts"calculating 10 digit check sum "
 	sum = 0 	#zero out sum 
 	isbn_array = isbn.chars.map!(&:to_i) #loads individual characters in isbn into isbn_array and converts to integer
 	isbn_array.each_with_index do |value, index| # iterate through the array
@@ -52,8 +52,36 @@ end
 	end #end of if statement
 end
 
-def valid_isbn_13_length?(isbn)
-	true
+def valid_13_digit_checksum?(isbn)
+	# puts"calculating 13 digit check sum "
+	sum = 0 	#zero out sum 
+	check_sum_string =""
+	isbn_array = isbn.chars.map!(&:to_i) #loads individual characters in isbn into isbn_array and converts to integer
+	isbn_array.each_with_index do |value, index| # iterate through the array
+		break if index == 12 # stops the loop at position 9 in the array
+			if index % 2 == 0
+				sum += value * 1
+				# sum += value
+			else 
+				sum += value * 3
+			end #end if
+		end # end do loop
+		check_1 = sum % 10
+		#puts "check 1 = #{check_1}"
+		check_2 = 10 - check_1
+		#puts "check 2 =#{check_2}"
+		check_3 = check_2 % 10
+		#puts "check 3 = #{check_3}"
+		check_sum_string = check_3.to_s
+		#check_sum_string = isbn[-1]
+		# puts "check sum string = #{check_sum_string}"
+		# puts "isbn[-1] = #{isbn[-1]}"
+	if check_sum_string == isbn[-1] #hecks that check_sum string = last character if isbn
+		true
+	else
+		false
+	end #end of if statement		
+
 
 
 end
