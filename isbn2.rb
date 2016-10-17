@@ -22,13 +22,13 @@ end # valid 13 digit function
 
 def remove_spaces(isbn)
 
-	isbn.delete!(" ")
+	isbn = isbn.delete!(" ")
 
 end
 
 def remove_dashes(isbn)
 	
-	isbn.delete!("-")
+	isbn = isbn.delete!("-")
 
 end
 
